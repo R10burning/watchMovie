@@ -1,0 +1,30 @@
+$theme: #54D2ED;
+
+/*单边框函数*/
+@mixin border-some-px($width: 1px, $lineType: solid, $color: $theme) {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    border-bottom: $width $lineType $color;
+  }
+}
+
+@mixin border-top($width: 1px, $lineType: solid, $color: $theme) {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    border-bottom: $width $lineType $color;
+  }
+}
