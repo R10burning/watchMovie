@@ -39,10 +39,10 @@ export default class Container extends Component {
               title="首页"
               key="Home"
               icon={
-                <i className="fas fa-home" style={{fontSize: '21px',color: '#949494'}}/>
+                <i className="fas fa-film" style={{fontSize: '21px',color: '#949494'}}/>
               }
               selectedIcon={
-                <i className="fas fa-home" style={{fontSize: '21px',color: '#33A3F4'}}/>
+                <i className="fas fa-film" style={{fontSize: '21px',color: '#33A3F4'}}/>
               }
               selected={this.state.selectedTab === 'blueTab'}
               onPress={() => {

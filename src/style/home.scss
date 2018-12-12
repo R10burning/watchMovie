@@ -1,0 +1,41 @@
+.list-movie{
+  padding: 10px;
+  border: 0 !important;
+  height: 100%;
+  .list-item{
+    width: 100%;
+    display: flex;
+    justify-content: 'flex-start';
+    align-items: 'center';
+    margin-bottom: 10px;
+    .left{
+      img{
+        width: 80px;
+      }
+      margin-right: 10px;
+    }
+    .right{
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+      justify-content: flex-start;
+      align-items: flex-start;
+      & > *{
+        margin-bottom: 6px;
+      }
+      .title{
+        display: flex;
+        flex: 1;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .casts {
+        width: 82%;
+      }
+    }
+  }
+}
+.am-list-body::before {
+  background-color: transparent !important;
+}
