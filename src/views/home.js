@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Header from '@/components/header'
-import { Icon, ListView } from 'antd-mobile'
+import { Icon, ListView, ActivityIndicator, PullToRefresh} from 'antd-mobile'
 import request from '@/api'
 import query from 'querystring'
 import '@/style/home.scss'
@@ -11,26 +11,47 @@ export default class Home extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     })
     this.state = {
-      dataSource
+      dataSource,
+      isLoading: false,
+      start: 0,
+      page:1,
+      maxPage: 1,
+      listData:[],
+      refreshing: false
     }
   }
-  async componentDidMount () {
+  componentDidMount () {
+    this.getData()
+  }
+  async getData () {
+    await this.setState({
+      start: 0,
+      count: 10,
+      page: 1,
+      maxPage: null
+    })
     const base = {
       apikey: '0b2bdeda43b5688921839c8ecb20399b',
       city: '成都',
       start: 0,
       count: 10,
-      client: 'no',
+      client: 'no1',
       udid: 'no'
     }
-    const res = await request('GET', '/v2/movie/in_theaters?' + query.stringify(base))
-    console.log(res.data.subjects)
+    const res = await request('POST', '/v2/movie/in_theaters',{...base})
     if(res.status === 200) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res.data.subjects),
-        height: document.documentElement.clientHeight
+        height: document.documentElement.clientHeight,
+        maxPage: Math.ceil((res.data.total)/10),
+        listData: res.data.subjects,
+        refreshing: false
       })
     }
+  }
+  onRefresh () {
+    this.setState({refreshing: true})
+    this.getData()
   }
   renderRow (item) {
     return <div className='list-item'>
@@ -54,7 +75,37 @@ export default class Home extends Component {
             })}
         </div>
       </div>
+      <div className='ticket'>
+        <div className='watched'>
+          {
+            item.collect_count > 10000 ? `${(item.collect_count/10000).toFixed(1)}万人看过` :
+              `${item.collect_count}人看过`
+          }
+        </div>
+        <a href='http://m.maoyan.com'>购票</a>
+      </div>
     </div>
+  }
+  async loadMore () {
+    this.state.start += 10
+    this.state.page++
+    if (this.state.page > this.state.maxPage || this.state.maxPage===1) return
+    await this.setState({isLoading: true})
+    let base = {
+      apikey: '0b2bdeda43b5688921839c8ecb20399b',
+      city: '成都',
+      start: this.state.start,
+      count: 10,
+      client: 'no1',
+      udid: 'no'
+    }
+    let res = await request('POST', '/v2/movie/in_theaters', {...base} )
+    if (res.status === 200) {
+      this.setState({
+        isLoading: false,
+        dataSource: this.state.dataSource.cloneWithRows(this.state.listData.concat(res.data.subjects))
+      })
+    }
   }
   render() {
     return (<div className="content-box">
@@ -62,8 +113,11 @@ export default class Home extends Component {
       <ListView
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
-        renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-          {this.state.isLoading ? 'Loading...' : 'Loaded'}
+        renderFooter={() => (<div style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}>
+          {this.state.isLoading && <ActivityIndicator
+            text='拼命加载中...'
+          />}
+          {(!this.state.isLoading && this.state.page >= this.state.maxPage) && '--我是有底线的--'}
         </div>)}
         renderRow={(item)=>this.renderRow(item)}
         // renderSeparator={}
@@ -74,10 +128,14 @@ export default class Home extends Component {
           overflowX: 'hidden',
           overflowY: 'auto'
         }}
-        onScroll={() => { console.log('scroll') }}
         // scrollRenderAheadDistance={500}
-        onEndReached={() => alert(123)}
-        onEndReachedThreshold={10}
+        onEndReached={() => this.loadMore()}
+        onEndReachedThreshold={1}
+        pullToRefresh={<PullToRefresh
+          distanceToRefresh={40}
+          refreshing={this.state.refreshing}
+          onRefresh={()=>this.onRefresh()}
+        />}
       />
     </div>)
   }

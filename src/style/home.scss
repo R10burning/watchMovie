@@ -1,13 +1,13 @@
 .list-movie{
-  padding: 10px;
   border: 0 !important;
   height: 100%;
   .list-item{
     width: 100%;
     display: flex;
-    justify-content: 'flex-start';
-    align-items: 'center';
-    margin-bottom: 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
     .left{
       img{
         width: 80px;
@@ -25,17 +25,44 @@
         margin-bottom: 6px;
       }
       .title{
-        display: flex;
-        flex: 1;
         font-size: 16px;
         font-weight: bold;
+        width: 100%;
       }
       .casts {
-        width: 82%;
+        width: 100%;
+      }
+    }
+    .ticket{
+      align-self: center;
+      padding-left: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 78px;
+      .watched{
+        font-size: 12px;
+        color: #fe6676;
+        margin-bottom: 5px;
+      }
+      >a{
+        display: inline-block;
+        border: 1px solid #fe6676;
+        padding: 5px 8px;
+        color: #fe6676;
+        border-radius: 3px;
       }
     }
   }
 }
-.am-list-body::before {
+.am-list-body:before {
   background-color: transparent !important;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  html:not([data-scale]) .am-list-body::before {
+    background-color: transparent !important;
+  }
+}
+.am-list{
+  width: 100% !important;
 }
