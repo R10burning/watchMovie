@@ -24,7 +24,7 @@ class CommonList extends Component {
       start: 0,
       page:1,
       maxPage: 1,
-      listData:[],
+      listData: null,
       refreshing: false
     }
   }
@@ -63,7 +63,8 @@ class CommonList extends Component {
     this.setState({refreshing: true})
     this.getData()
   }
-  toDetail (item) {
+  toDetail (e, item) {
+    if (e.target.innerText === '购票') return
     this.props.history.push({
       pathname:'/movieDetail',
       state:{
@@ -72,7 +73,7 @@ class CommonList extends Component {
     })
   }
   renderRow (item) {
-    return <div className='list-item' onClick={()=> this.toDetail(item)}>
+    return <div className='list-item' onClick={(e)=> this.toDetail(e,item)}>
       <div className='left'>
         <img src={item.images.small} alt=""/>
       </div>
@@ -135,33 +136,38 @@ class CommonList extends Component {
   }
   render() {
     return (
-      <ListView
-        ref={el => this.lv = el}
-        dataSource={this.state.dataSource}
-        renderFooter={() => (<div style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}>
-          {this.state.isLoading && <ActivityIndicator
-            text='拼命加载中...'
+      this.state.listData ?
+        <ListView
+          ref={el => this.lv = el}
+          dataSource={this.state.dataSource}
+          renderFooter={() => (<div style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}>
+            {this.state.isLoading && <ActivityIndicator
+              text='拼命加载中...'
+            />}
+            {(!this.state.isLoading && this.state.page >= this.state.maxPage) && '--我是有底线的--'}
+          </div>)}
+          renderRow={(item)=>this.renderRow(item)}
+          // renderSeparator={}
+          className="am-list list-movie"
+          pageSize={4}
+          style={{
+            height: this.state.height,
+            overflowX: 'hidden',
+            overflowY: 'auto'
+          }}
+          // scrollRenderAheadDistance={500}
+          onEndReached={() => this.loadMore()}
+          onEndReachedThreshold={1}
+          pullToRefresh={<PullToRefresh
+            distanceToRefresh={40}
+            refreshing={this.state.refreshing}
+            onRefresh={()=>this.onRefresh()}
           />}
-          {(!this.state.isLoading && this.state.page >= this.state.maxPage) && '--我是有底线的--'}
-        </div>)}
-        renderRow={(item)=>this.renderRow(item)}
-        // renderSeparator={}
-        className="am-list list-movie"
-        pageSize={4}
-        style={{
-          height: this.state.height,
-          overflowX: 'hidden',
-          overflowY: 'auto'
-        }}
-        // scrollRenderAheadDistance={500}
-        onEndReached={() => this.loadMore()}
-        onEndReachedThreshold={1}
-        pullToRefresh={<PullToRefresh
-          distanceToRefresh={40}
-          refreshing={this.state.refreshing}
-          onRefresh={()=>this.onRefresh()}
-        />}
-      />
+        /> : <div style={{
+          marginTop: '60px', display: 'flex', justifyContent:'center'
+        }}>
+          <ActivityIndicator text='拼命加载中...'/>
+        </div>
     )
   }
 }

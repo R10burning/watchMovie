@@ -10,7 +10,8 @@ export default class MovieDetail extends Component {
     super()
     this.state = {
       item: null,
-      change: false
+      change: false,
+      picData: null
     }
   }
   componentWillMount () {
@@ -21,6 +22,7 @@ export default class MovieDetail extends Component {
   }
   componentDidMount () {
     this.getData()
+    this.getPic()
   }
   filter (data, flag) {
     let str = ''
@@ -41,7 +43,6 @@ export default class MovieDetail extends Component {
       udid: 'no'
     }
     let res = await request('POST', apis.movieDetail+`/${id}`,{...base})
-    console.log(res.data)
     if (res.status === 200) {
       this.setState({
         item: res.data
@@ -50,10 +51,32 @@ export default class MovieDetail extends Component {
       Toast.fail('网络错误', 1)
     }
   }
+  async getPic () {
+    const { id } = this.props.location.state.item
+    const base = {
+      apikey: '0b2bdeda43b5688921839c8ecb20399b',
+      city: '成都',
+      client: 'no1',
+      udid: 'no',
+      start: 0,
+      count: 10
+    }
+    let res = await request('POST', apis.moviePic + `/${id}/photos`, base)
+    if (res.status === 200) {
+      this.setState({
+        picData: res.data.photos
+      })
+    } else {
+      Toast.fail('网络错误', 1)
+    }
+  }
   changeColor () {
     if (this.props.match.path == '/movieDetail') {
       let scrollTop = document.documentElement.scrollTop
-      if (scrollTop > document.getElementById('poster').offsetHeight) {
+      const poster = document.getElementById('poster')
+      if (!poster) return
+      const topHeight = poster && poster.clientHeight
+      if (scrollTop > topHeight-45) {
         this.setState({
           change: true
         })
@@ -65,10 +88,9 @@ export default class MovieDetail extends Component {
     }
   }
   renderActor () {
-    return this.state.item && this.state.item.casts.map((res, index)=>{
-      console.log(res)
-      return <img src={res.avatars.small}/>
-    })
+    if(this.state.item){
+      return <img src={this.state.item.casts[0].avatars.small}/>
+    }
   }
   render() {
     const { title } = this.props.location.state.item
@@ -123,9 +145,7 @@ export default class MovieDetail extends Component {
           <div className="actor">
             <h5>影人</h5>
             <ul>
-              <li>
-                { this.renderActor() }
-              </li>
+              { this.state.picData && this.state.picData.map((res, index) => <li key={index}><img src={'https://images.weserv.nl/?url=' + res.cover}/></li>) }
             </ul>
           </div>
         </div>
