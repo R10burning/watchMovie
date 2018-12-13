@@ -103,8 +103,13 @@ export default class Home extends Component {
     if (res.status === 200) {
       this.setState({
         isLoading: false,
-        dataSource: this.state.dataSource.cloneWithRows(this.state.listData.concat(res.data.subjects))
-      })
+        listData: this.state.listData.concat(res.data.subjects)
+      }, () => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.state.listData)
+        })
+      }
+      )
     }
   }
   render() {

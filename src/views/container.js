@@ -36,7 +36,7 @@ export default class Container extends Component {
             hidden={this.state.hidden}
           >
             <TabBar.Item
-              title="首页"
+              title="正在热映"
               key="Home"
               icon={
                 <i className="fas fa-film" style={{fontSize: '21px',color: '#949494'}}/>

@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 声明 #
+**程序涉及API 本人皆从网络获取。获取与共享之行为或有侵犯产品权益的嫌疑。若被告知需停止共享与使用，本人会及时删除此页面与整个项目。请您暸解相关情况，并遵守协议。**
+<h1>再次声明，本人皆从网络获取，并非本人抓取</h2>
 
 ## Available Scripts
 
