@@ -3,7 +3,7 @@ import {
   Route
 } from 'react-router-dom'
 import Home from 'views/home'
-import Me from 'views/me'
+import Top from 'views/top250'
 import { TabBar } from 'antd-mobile' 
 
 
@@ -31,7 +31,7 @@ export default class Container extends Component {
         <Route>
           <TabBar
             unselectedTintColor="#949494"
-            tintColor="#33A3F4"
+            tintColor={this.state.selectedTab === 'redTab' ? '#fe6676' :'#33A3F4'}
             barTintColor="white"
             hidden={this.state.hidden}
           >
@@ -57,36 +57,23 @@ export default class Container extends Component {
             </TabBar.Item>
             <TabBar.Item
               icon={
-                <i className="fas fa-plus-circle" style={{fontSize: '21px',color: 'orange'}}/>
+                <i className="fab fa-hotjar" style={{fontSize: '21px',color: '#949494'}}/>
               }
               selectedIcon={
-                <i className="fas fa-plus-circle" style={{fontSize: '21px',color: 'orange'}}/>
+                <i className="fab fa-hotjar" style={{fontSize: '21px',color: '#fe6676'}}/>
               }
-              title="发布"
-              key="pub"
-              onPress={() => {
-                history.push('/login')
-              }}
-            />
-            <TabBar.Item
-              icon={
-                <i className="fas fa-user" style={{fontSize: '21px',color: '#949494'}}/>
-              }
-              selectedIcon={
-                <i className="fas fa-user" style={{fontSize: '21px',color: '#33A3F4'}}/>
-              }
-              title="我的"
-              key="my"
+              title="top250"
+              key="top"
               selected={this.state.selectedTab === 'redTab'}
               onPress={() => {
                 this.setState({
                   selectedTab: 'redTab',
                 })
-                history.push('/me')
+                history.push('/top250')
               }}
               data-seed="logId1"
             >
-              <Me/>
+              <Top/>
             </TabBar.Item>
           </TabBar>
         </Route>

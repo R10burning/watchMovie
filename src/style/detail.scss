@@ -1,0 +1,84 @@
+#poster{
+  display: flex;
+  background-color: rgba(0,0,0,.2);
+  justify-content: center;
+  align-items: center;
+  padding:60px 60px 15px 60px;
+  img{
+    width: 70%;
+  }
+}
+.des {
+  padding: 15px;
+  >div.first {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    .left{
+      overflow: hidden;
+      flex: 1;
+      .title{
+        font-size: 16px;
+        font-weight: bold;
+        color: #666;
+      }
+      .year {
+        color: #666;
+        p{
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      }
+    }
+    .right{
+      margin-left: 10px;
+      text-align: center;
+      .box{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding:10px;
+        width: 80px;
+        height: 80px;
+        box-shadow: 0 0 5px #ccc;
+        p{
+          font-size: 12px;
+          color: #999;
+        }
+        .number{
+          font-size: 20px;
+          font-weight: bold;
+          color: #666;
+        }
+      }
+    }
+  }
+  .second{
+    margin-top: 15px;
+    p{
+      line-height: 18px;
+      color: #666;
+    }
+  }
+  h5 {
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .actor{
+    margin-top: 10px;
+    ul{
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-y: hidden;
+      overflow-x: auto;
+      li{
+        img{
+          width: 80px;
+        }
+      }
+    }
+  }
+}

@@ -6,11 +6,15 @@ import { withRouter } from 'react-router-dom'
 class Header extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    right: PropTypes.element.isRequired
+    right: PropTypes.element.isRequired,
+    transparent: PropTypes.bool.isRequired,
+    changeColor: PropTypes.bool.isRequired
   }
   static defaultProps = {
     title: '',
-    right: <i/>
+    right: <i/>,
+    transparent: false,
+    changeColor: false
   }
   constructor (props) {
     super(props)
@@ -21,21 +25,30 @@ class Header extends Component {
   componentDidMount () {
     const { match } = this.props
     this.setState({
-      canGoBack: (match.path === '/' || match.path === '/home' || match.path === '/me') ? false : true
+      canGoBack: (match.path === '/' || match.path === '/home' || match.path === '/top250') ? false : true
     })
+  }
+  back () {
+    this.props.history.goBack()
+  }
+  ellipse (title) {
+    return title.length > 12 ? title.substr(0, 12) + '...' : title
   }
   render() {
     const { match } = this.props
     return (
       <div>
         <NavBar
+          style={{
+            backgroundColor: this.props.transparent && !this.props.changeColor ? 'rgba(0,0,0,.1)' : this.props.transparent && this.props.changeColor ? '#108ee9' : '#108ee9'
+          }}
           id="ant-header"
           mode="dark"
-          icon={this.state.canGoBack && <Icon type="left" />}
+          icon={this.state.canGoBack && <Icon type="left" onClick={()=>this.back()}/>}
           rightContent={
             (match.path === '/' || match.path === '/home') && this.props.right
           }
-        >{ (match.path === '/' || match.path === '/home') ? '首页' :  match.path === '/me' ? '我的' : this.props.title }</NavBar>
+        >{ this.ellipse((match.path === '/' || match.path === '/home') ? '首页' :  match.path === '/top250' ? 'Top250' : this.props.title) }</NavBar>
       </div>
     )
   }
