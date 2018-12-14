@@ -76,10 +76,33 @@
       overflow-x: auto;
       li{
         margin-right: 5px;
+        width: 80px;
         img{
           width: 80px;
         }
+        p{
+          color: #666;
+          font-size: 12px;
+        }
       }
+    }
+  }
+  .film-photo {
+    margin-top: 10px;
+    li{
+      width: 200px !important;
+    }
+    img{
+      width: 200px !important;
+      height: 200px;
+    }
+    #play{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: rgba(0,0,0,.8);
     }
   }
 }
