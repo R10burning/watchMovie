@@ -7,5 +7,7 @@ export default {
   // 电影详情
   movieDetail: '/v2/movie/subject',
   // 电影图片
-  moviePic: 'v2/movie/subject/'
+  moviePic: 'v2/movie/subject/',
+  // 评论
+  movieComments: 'v2/movie/subject/'
 }

@@ -9,6 +9,7 @@ import Container from '@/views/container'
 import MovieDetail from '@/views/movieDetail'
 import VideoPlay from '@/views/videoPlay'
 import ActorInfo from '@/views/actorInfo'
+import AllComments from '@/views/allComments'
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path='/top250' component={Container}></Route>
             <Route path='/videoPlay' component={VideoPlay}></Route>
             <Route path='/actorInfo' component={ActorInfo}></Route>
+            <Route path='/comments' component={AllComments}></Route>
             <Redirect to='/404'/>
           </Switch>
         </Router>
