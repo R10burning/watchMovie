@@ -7,9 +7,3 @@
 <h4> npm start 访问localhost:3000即可</h4>
 <h3>截图</h3>
 ![image](https://github.com/R10burning/watchMovie/master/screenShots/01.png)
-![image](https://github.com/R10burning/watchMovie/master/screenShots/02.png)
-![image](https://github.com/R10burning/watchMovie/master/screenShots/03.png)
-![image](https://github.com/R10burning/watchMovie/master/screenShots/04.png)
-![image](https://github.com/R10burning/watchMovie/master/screenShots/05.png)
-![image](https://github.com/R10burning/watchMovie/master/screenShots/06.png)
-![image](https://github.com/R10burning/watchMovie/master/screenShots/07.png)
