@@ -6,4 +6,4 @@
 
 <h4> npm start 访问localhost:3000即可</h4>
 <h3>截图</h3>
-![image](http://github.com/R10burning/watchMovie/raw/master/screenShots/01.png)
+(http://github.com/R10burning/watchMovie/raw/master/screenShots/01.png)
