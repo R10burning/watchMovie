@@ -12,4 +12,13 @@
 ![image](http://github.com/R10burning/watchMovie/raw/master/screenShots/04.png)
 ![image](http://github.com/R10burning/watchMovie/raw/master/screenShots/05.png)
 ![image](http://github.com/R10burning/watchMovie/raw/master/screenShots/06.png)
-![image](http://github.com/R10burning/watchMovie/raw/master/screenShots/07.png)
+![image](http://github.com/R10burning/watchMovie/raw/master/screenShots/07.png);
+
+
+
+
+
+
+
+
+![](http://img.wdjimg.com/mms/icon/v1/e/81/8974ffd9388f547dc8877e0c55d2e81e_78_78.png)
