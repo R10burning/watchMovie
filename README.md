@@ -6,5 +6,4 @@
 
 <h4> npm start 访问localhost:3000即可</h4>
 <h3>截图</h3>
-![image](https://github.com/R10burning/watchMovie/tree/master/screenShots/01.png)
-![image](https://github.com/ButBueatiful/dotvim/raw/master/screenshots/vim-screenshot.jpg)
+![image](./screenShots/01.png)
