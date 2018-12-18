@@ -14,4 +14,4 @@
 
 
 
-![](http://github.com/R10burning/watchMovie/raw/master/screenShots/07.png)
+![截图](http://github.com/R10burning/watchMovie/raw/master/screenShots/07.png)
