@@ -35,7 +35,7 @@ class Header extends Component {
     return title.length > 12 ? title.substr(0, 12) + '...' : title
   }
   render() {
-    const  { match } = this.props
+    const { match } = this.props
     return (
       <div>
         <NavBar
