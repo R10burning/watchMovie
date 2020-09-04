@@ -116,7 +116,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.6.0",
     "babel-plugin-import": "^1.11.0",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.1"
   },
   "proxy": "https://api.douban.com"
 }
